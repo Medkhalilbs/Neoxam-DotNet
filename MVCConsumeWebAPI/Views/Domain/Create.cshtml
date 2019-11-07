@@ -1,0 +1,77 @@
+﻿@model MVCConsumeWebAPI.Models.Domain
+
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+
+
+
+        <div class="row">
+
+            <div class="col-lg-11">
+                <div class="card">
+                    <div class="card-body">
+                        <h2 class="card-title">Ajouter un nouveau theme</h2>
+                        <form class="form p-t-20">
+                            <div class="form-group">
+                                <label>Ajouter nom domaine</label>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon11"><i class="icon-folder-alt"></i></span>
+                                    </div>
+                                    <div class="col-11">
+                                        @*@Html.EditorFor(model => model.name, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.name, "", new { @class = "text-danger" })*@
+                                        <input type="text" class="form-control" placeholder="Theme" aria-label="domain" aria-describedby="basic-addon22" id="id" name="name" />
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label>Choisir type</label>
+                                    <select class="custom-select col-12" id="inlineFormCustomSelect" name="type">
+
+                                        <option value="0">Technique</option>
+                                        <option value="1">Langue</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group row p-t-20">
+                                @*<div class="col-sm-4">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input" id="customCheck3">
+                                    <label class="custom-control-label" for="customCheck3">Check this custom checkbox</label>
+                                </div>
+                            </div>*@
+                                @*<div class="col-sm-4">
+                                <div >
+                                    <input type="radio" name="type" id="id">
+                                    <label >Langue</label>
+                                </div>
+                            </div>*@
+                            </div>
+                            <button type="submit" class="btn btn-success m-r-10"> <i class="ti-save"></i> Ajouter</button>
+                            <button type="submit" class="btn btn-dark">Cancel</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+    </div>
+
+
+
+}
+
+
+
+
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+

@@ -1,0 +1,94 @@
+﻿@model MVCConsumeWebAPI.Models.topic
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+
+
+@using (Html.BeginForm("Details", "Topic",FormMethod.Post, new { onsubmit = "return SubmitForm(this)" }))
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>topic</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.id)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.dureeTopic, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.dureeTopic, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.dureeTopic, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.image, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.image, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.image, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.nom, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.nom, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.nom, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        @foreach (var item in Model.questions)
+        {
+        <div class="form-group">
+            @Html.LabelFor(model => item.enonce, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @*<input type="text" name="@reponse.type_reponse" value="@reponse.type_reponse" disabled><br>*@
+                @Html.EditorFor(model => item.enonce, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+            @foreach (var answer in item.answers)
+            {
+                @Html.LabelFor(model => answer.type_reponse, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => answer.type_reponse, new { htmlAttributes = new { @class = "form-control" } })
+                </div>
+
+            }
+
+        </div>
+
+
+        }
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<script>
+function SubmitForm(form) {
+        $.ajax({
+            type: "GET",
+            url: form.action,
+            data: $(form).serialize(),
+            success: function (data) {
+                if (data.success) {
+                    Popup.dialog("close");
+                    alert("wsellllt");
+
+
+                }
+            }
+        });
+        return false;
+}
+</script>
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

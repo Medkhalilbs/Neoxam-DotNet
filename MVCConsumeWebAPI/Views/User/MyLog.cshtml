@@ -1,0 +1,72 @@
+﻿@model IEnumerable<PI_Neoxam_GRH.Domain.Enities.user_log>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+
+
+
+@(Html.Kendo().Grid<PI_Neoxam_GRH.Domain.Enities.user_log>()
+    .Name("grid")
+    .Columns(columns =>
+    {
+        columns.Bound(o => o.id).Title("ID").Width(40);
+        columns.Bound(o => o.country).Title("Pay").Width(100);
+        columns.Bound(o => o.ip_address).Width(150).Title("IP Adresse");
+        columns.Bound(o => o.login_timestamp).Width(160).Format("{0:dd/MM/yyyy HH:mm:ss}").Title("Date de connexion"); // escaped template expression, to be evaluated in the child/detail context
+        columns.Bound(o => o.logout_timestamp).Width(160).Format("{0:dd/MM/yyyy HH:mm:ss}").Title("Date de déconnexion");
+        columns.Bound(o => o.pc_id).Width(150).Title("ID PC");
+        columns.Bound(o => o.session_id).Width(300).Title("SessionID");
+
+    })
+    //.Editable(editable => editable.Mode(GridEditMode.PopUp).TemplateName("EditPopUp"))
+    .Sortable()
+    .Pageable()
+    .Scrollable()
+    .HtmlAttributes(new { style = "height:550px;" })
+    .DataSource(dataSource => dataSource
+        .Ajax()
+        .PageSize(20)
+        .Read(read => read.Action("User_logListe", "User"))
+
+
+
+    )
+   
+)
+
+
+<script>
+    function dataBound() {
+        this.expandRow(this.tbody.find("tr.k-master-row").first());
+    }
+</script>
+
+<style>
+    .k-detail-cell .k-tabstrip .k-content {
+        padding: 0.2em;
+    }
+
+    .employee-details ul {
+        list-style: none;
+        font-style: italic;
+        margin: 15px;
+        padding: 0;
+    }
+
+        .employee-details ul li {
+            margin: 0;
+            line-height: 1.7em;
+        }
+
+    .employee-details label {
+        display: inline-block;
+        width: 90px;
+        padding-right: 10px;
+        text-align: right;
+        font-style: normal;
+        font-weight: bold;
+    }
+</style>
+

@@ -1,0 +1,26 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Liste reponse</h2>
+
+<table cellpadding="2" cellspacing="2" border="1" style="border-width:2px; border-style:solid;  border-color:darkgray; width:100%;">
+    <tr>
+        <th>Id</th>
+        <th>Enonce</th>
+        
+
+    </tr>
+    @foreach (var p in ViewBag.result)
+            {
+        <tr>
+            <td>@p.id</td>
+            <td>@p.type_reponse</td>
+          
+
+
+
+        </tr>
+    }
+</table>

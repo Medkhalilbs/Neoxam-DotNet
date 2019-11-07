@@ -1,0 +1,148 @@
+﻿
+@model IEnumerable<EAGetMail.Mail>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Boite de reception d'emails</h2>
+
+
+
+@(Html.Kendo().Grid<EAGetMail.Mail>()
+        .Name("grid")
+        .Columns(columns =>
+        {    
+            columns.Bound(c => c.From.Address).Lockable(true); 
+            columns.Bound(c => c.Subject).Lockable(true); 
+            columns.Bound(c => c.TextBody).Lockable(false);
+            columns.Bound(c => c.SentDate).Width(200).Lockable(true).Format("{0:dd/MM/yyyy HH:mm:ss}").Title("Date d'envoie");
+
+
+
+            
+        })
+        .HtmlAttributes(new { style = "height: 550px;" })
+        .ToolBar(tools => tools.Excel()).Excel(excel => excel.FileName("Liste des emails.xlsx").Filterable(true).ProxyURL(Url.Action("Excel_Export_Save", "Message")))
+        .ToolBar(tools => tools.Pdf()).Pdf(excel => excel.FileName("Liste des emails.pdf").ProxyURL(Url.Action("Excel_Export_Save", "Message")))
+        .Scrollable()
+        .Groupable()
+        .Sortable()
+        .Reorderable(reorderable => reorderable.Columns(true))
+        .Resizable(resizable => resizable.Columns(true))
+        .Filterable()
+        .ColumnMenu()
+        //.ClientDetailTemplateId("template")
+        .Pageable(pageable => pageable
+            .Refresh(true)
+            .PageSizes(true)
+            .ButtonCount(5))
+        .DataSource(dataSource => dataSource
+            .Ajax()
+            .Read(read => read.Action("MailsListe", "Email"))
+            .PageSize(20)
+        )
+)
+
+<style>
+    .customer-photo {
+        display: inline-block;
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        background-size: 32px 35px;
+        background-position: center center;
+        vertical-align: middle;
+        line-height: 32px;
+        box-shadow: inset 0 0 1px #999, inset 0 0 10px rgba(0,0,0,.2);
+        margin-left: 5px;
+    }
+
+    .customer-name {
+        display: inline-block;
+        vertical-align: middle;
+        line-height: 32px;
+        padding-left: 3px;
+    }
+</style>
+
+
+
+
+@*<script id="template" type="text/kendo-tmpl">
+    @(Html.Kendo().Grid<EAGetMail.Attachment>()
+            .Name("grid_#=TextBody#") // template expression, to be evaluated in the master context
+            .Columns(columns =>
+            {
+                columns.Bound(o => o.Name).Width(110);
+            })
+            .DataSource(dataSource => dataSource
+                .Ajax()
+                .PageSize(10)
+                .Read(read => read.Action("AttachmentsListeByEmailID", "Message",  new { id = "#=SentDate.ToString('dd/MM/yyyy HH:mm:ss')#" }))
+            )
+            .Pageable()
+            .Sortable()
+            .ToClientTemplate()
+    )
+</script>
+<script>
+    function dataBound() {
+        this.expandRow(this.tbody.find("tr.k-master-row").first());
+    }
+</script>*@
+
+
+
+
+<script type="text/javascript">
+    //var newEmailsNumber;
+    var initialEmailNumber;
+
+    $(document).ready(function myPeriodicMethod() {
+    $.ajax({
+        url: "http://localhost:4054/Email/NewEmailsNumber",
+        type: "GET",
+        data: { emailsNumber: document.getElementById("grid").getElementsByTagName("tr").length-1},
+        dataType: "json",
+        success: function (response) {
+            initialEmailNumber = response;
+            //alert("newEmailsNumber=" + newEmailsNumber)
+            //alert("refresh=");
+            
+        },
+        error: function (response) {
+            alert("Erreur lors lecture nombre email initial" );
+        },
+        complete: function () {
+            //setTimeout(myPeriodicMethod, 3000);
+        }
+    });
+    });
+
+    $(document).ready(function myPeriodicMethod2() {
+        $.ajax({
+            url: "http://localhost:4054/Email/NewEmailsNumber",
+            type: "GET",
+            dataType: "json",
+            success: function (response) {
+
+                if (response != initialEmailNumber) {
+                    initialEmailNumber = response;
+                    //alert("newEmailsNumber=" + initialEmailNumber);
+                    $(".k-pager-refresh").trigger("click");
+                }
+            },
+            error: function (response) {
+                alert(response);
+            },
+            complete: function () {
+                // schedule the next request *only* when the current one is complete:
+                setTimeout(myPeriodicMethod2, 500);
+            }
+        });
+    });
+</script>
+
+
+

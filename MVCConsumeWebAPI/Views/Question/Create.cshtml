@@ -1,0 +1,199 @@
+﻿@model MVCConsumeWebAPI.Models.question
+
+
+
+
+@*@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>question @ViewBag.nom</h4>*@
+        @*<hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.complexity, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.complexity, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.complexity, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
+
+        
+
+        @*<div class="form-group">
+            @Html.LabelFor(model => model.indice, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.indice, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.indice, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
+
+        @*<div class="form-group">
+            @Html.LabelFor(model => model.point, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.point, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.point, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
+
+        @*<div class="form-group">
+            @Html.LabelFor(model => model.type, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.type, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.type, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
+
+        @*<div class="form-group">
+            @Html.LabelFor(model => model.topic, htmlAttributes: new { @class = "control-label col-md-2" })
+
+            <div class="col-md-10">
+
+                <select id="select_topic">
+                    @foreach (var p in ViewBag.result)
+                {
+                        <option name=@p.nom value=@p.id> @p.nom</option>
+
+                    }
+
+                </select>
+                @Html.HiddenFor(model => model.topic.id, new { @id = "topic_value" })
+
+                <script>
+
+                    document.getElementById("topic_value").value = document.getElementById("select_topic").value;
+
+                </script>
+            </div>
+        </div>*@
+        @*<div class="form-group">
+            @Html.LabelFor(model => model.reponsejuste, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.reponsejuste, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.reponsejuste, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
+
+        @*<div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}*@
+
+
+
+
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+
+
+        <div class="row">
+
+            <div class="col-lg-11">
+                <div class="card">
+                    <div class="card-body">
+                        <h2 class="card-title">Ajouter une question</h2>
+                        <form class="form p-t-20" method="post">
+                            <div class="form-group">
+                                <label>Ajouter enonce question</label>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon11"><i class="ti-file"></i></span>
+                                    </div>
+                                    <div class="col-11">
+                                        <input type="text" class="form-control" placeholder="Enonce" aria-describedby="basic-addon22" id="id" name="enonce" />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Ajouter une indice</label>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon11"><i class="ti-light-bulb"></i></span>
+                                    </div>
+                                    <div class="col-11">
+                                        <input type="text" class="form-control" placeholder="Aide" aria-label="domain" aria-describedby="basic-addon22" id="id" name="indice" />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Ajouter nombre de points</label>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon11"><i class="ti-more-alt"></i></span>
+                                    </div>
+                                    <div class="col-11">
+                                        <input type="number" class="form-control" placeholder="Points" aria-label="domain" aria-describedby="basic-addon22" id="id" name="point" />
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="form-group">
+                                <label>Reponse juste</label>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon11"><i class="ti-files"></i></span>
+                                    </div>
+                                    <div class="col-11">
+                                        <input type="text" class="form-control" placeholder="Reponse" aria-label="domain" aria-describedby="basic-addon22" id="id" name="reponsejuste" />
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            @*<div class="col-12">
+                                    <div class="form-group">
+                                        <label>Complexite du question</label>
+                                        <select class="custom-select col-12" id="inlineFormCustomSelect" name="type">
+
+                                            <option value="0">Technique</option>
+                                            <option value="1">Langue</option>
+                                        </select>
+                                    </div>
+                                </div>*@
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label">Complexite du question</label>
+                                    <div class="custom-control custom-radio">
+                                        <input type="radio" id="customRadio11" name="complexity" class="custom-control-input" value="Facile">
+                                        <label class="custom-control-label" for="customRadio11">Facile</label>
+                                    </div>
+                                    <div class="custom-control custom-radio">
+                                        <input type="radio" id="customRadio22" name="complexity" class="custom-control-input" value="Moyenne">
+                                        <label class="custom-control-label" for="customRadio22">Moyenne</label>
+                                    </div>
+                                    <div class="custom-control custom-radio">
+                                        <input type="radio" id="customRadio22" name="complexity" class="custom-control-input" value="Difficile">
+                                        <label class="custom-control-label" for="customRadio22">Difficile</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group row p-t-20">
+                            </div>
+                            <button type="submit" class="btn btn-success m-r-10"><i class="ti-save"></i> Ajouter</button>
+                            <button type="submit" class="btn btn-dark">Cancel</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

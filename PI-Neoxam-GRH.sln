@@ -1,0 +1,52 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PI-Neoxam-GRH.Console", "PI-Neoxam-GRH.Console\PI-Neoxam-GRH.Console.csproj", "{D8DCB200-0242-44D6-B33C-68F29714CF9B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PI-Neoxam-GRH.Data", "PI-Neoxam-GRH.Data\PI-Neoxam-GRH.Data.csproj", "{767977DD-1C81-4AC1-ACF8-A45B8EA9CC30}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PI-Neoxam-GRH.Domain", "PI-Neoxam-GRH.Domain\PI-Neoxam-GRH.Domain.csproj", "{574ED162-D119-4A35-860D-A41D31A6288D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PI-Neoxam-GRH.Services", "PI-Neoxam-GRH.Services\PI-Neoxam-GRH.Services.csproj", "{1CDF7D28-5C93-4D65-A865-1418C07E4F7F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PI-Neoxam-GRH.ServicesPattern", "PI-Neoxam-GRH.ServicesPattern\PI-Neoxam-GRH.ServicesPattern.csproj", "{01490367-0178-4B2A-AC8F-BF030B39188F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MVCConsumeWebAPI", "MVCConsumeWebAPI\MVCConsumeWebAPI.csproj", "{59971BE3-0996-403E-9F1C-C4EBE9D729CF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D8DCB200-0242-44D6-B33C-68F29714CF9B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D8DCB200-0242-44D6-B33C-68F29714CF9B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D8DCB200-0242-44D6-B33C-68F29714CF9B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D8DCB200-0242-44D6-B33C-68F29714CF9B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{767977DD-1C81-4AC1-ACF8-A45B8EA9CC30}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{767977DD-1C81-4AC1-ACF8-A45B8EA9CC30}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{767977DD-1C81-4AC1-ACF8-A45B8EA9CC30}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{767977DD-1C81-4AC1-ACF8-A45B8EA9CC30}.Release|Any CPU.Build.0 = Release|Any CPU
+		{574ED162-D119-4A35-860D-A41D31A6288D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{574ED162-D119-4A35-860D-A41D31A6288D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{574ED162-D119-4A35-860D-A41D31A6288D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{574ED162-D119-4A35-860D-A41D31A6288D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1CDF7D28-5C93-4D65-A865-1418C07E4F7F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1CDF7D28-5C93-4D65-A865-1418C07E4F7F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1CDF7D28-5C93-4D65-A865-1418C07E4F7F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1CDF7D28-5C93-4D65-A865-1418C07E4F7F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{01490367-0178-4B2A-AC8F-BF030B39188F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{01490367-0178-4B2A-AC8F-BF030B39188F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{01490367-0178-4B2A-AC8F-BF030B39188F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{01490367-0178-4B2A-AC8F-BF030B39188F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{59971BE3-0996-403E-9F1C-C4EBE9D729CF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{59971BE3-0996-403E-9F1C-C4EBE9D729CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{59971BE3-0996-403E-9F1C-C4EBE9D729CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{59971BE3-0996-403E-9F1C-C4EBE9D729CF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

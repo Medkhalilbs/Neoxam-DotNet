@@ -1,0 +1,105 @@
+﻿@model MVCConsumeWebAPI.Models.reclamation
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Envoyer une reclamation</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.id)
+
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Objet</h4>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-addon11"><i class="icon-folder-alt"></i></span>
+                            </div>
+                            <div class="col-11">
+                                @Html.EditorFor(model => model.description, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.objet, "", new { @class = "text-danger" }) </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Description</h4>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-addon11"><i class="icon-folder-alt"></i></span>
+                            </div>
+                            <div class="col-11">
+                                @Html.EditorFor(model => model.objet, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.description, "", new { @class = "text-danger" }) </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.image, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.image, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.image, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+
+                <center>
+                    <button type="submit" class="btn btn-warning m-r-10"> <i class="ti-save"></i> Modifier</button>
+                    <button type="submit" class="btn btn-dark">Cancel</button>
+                </center>
+
+            </div>
+
+
+            <div class="col-4">
+                <div class="card">
+                    <div class="card-body">
+                        <div>
+
+                            @(Html.Kendo().Map()
+    .Name("map")
+    .Center(36.8973307, 10.1925694)
+    .Zoom(15)
+    .Layers(layers =>
+    {
+        layers.Add()
+            .Type(MapLayerType.Tile)
+            .UrlTemplate("http://#= subdomain #.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png")
+            .Subdomains("a", "b", "c")
+            .Attribution("&copy; <a href='http://osm.org/copyright'>OpenStreetMap contributors</a>");
+    })
+    .Markers(markers =>
+    {
+        markers.Add()
+            .Location(36.8973307, 10.1925694)
+            .Shape(MapMarkersShape.PinTarget)
+            .Tooltip(tooltip => tooltip.Content("NeoXam"));
+    })
+                            )
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+
+
+

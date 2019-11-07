@@ -1,0 +1,93 @@
+﻿@model IEnumerable<MVCConsumeWebAPI.Models.User>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+
+
+
+<table class="table" id="messageTable">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.role)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.login)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.registration_date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.status)
+        </th>
+        @*<th>
+            @Html.DisplayNameFor(model => model.sujet)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.visibiliteMessage)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.user_id)
+        </th>*@
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.id)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.role)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.email)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.login)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.registration_date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.status)
+        </td>
+        @*<td>
+            @Html.DisplayFor(modelItem => item.sujet)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.visibiliteMessage)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.user.id)
+        </td>*@
+        <td>
+            @Html.ActionLink("Modifier", "Edit", new { id=item.id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.id }) |
+            @Ajax.ActionLink(" Supprimer", "Delete", new { id = item.id }, new AjaxOptions { Confirm = "Are you sure you want to delete this entry?", HttpMethod = "DELETE", OnSuccess = "RemoveRow" }, new { @class = "btn btn-danger glyphicon glyphicon-trash" })
+            @*@Ajax.ActionLink("Delete", "Delete", new { id = item.id }, new AjaxOptions { Confirm = "Are you sure you want to delete this entry?", HttpMethod = "DELETE" })*@
+        </td>
+    </tr>
+}
+
+</table>
+@section scripts{ @Scripts.Render("~/Scripts/jquery.unobtrusive-ajax.min.js")}
+<script type="text/javascript">
+    function RemoveRow() {
+        var $tr = $(this).closest('tr');
+        $tr.remove();
+    }
+</script>
+
+
+
+
+
+

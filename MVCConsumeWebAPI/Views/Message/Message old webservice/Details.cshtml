@@ -1,0 +1,82 @@
+﻿@model MVCConsumeWebAPI.Models.Message
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>message</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.contenu)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.contenu)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.dateEnvoie)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.dateEnvoie)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.dateLecture)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.dateLecture)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.destinataire)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.destinataire)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.statusMessage)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.statusMessage)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.sujet)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.sujet)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.visibiliteMessage)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.visibiliteMessage)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.user_id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.user.id)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @*@Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
+    @Html.ActionLink("Back to List", "Index")*@
+</p>

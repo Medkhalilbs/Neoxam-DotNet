@@ -1,0 +1,137 @@
+﻿
+@{
+    ViewBag.Title = "Add Profile Informations";
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+
+<h2>AddProfileInformations</h2>
+
+    <div class="card">
+        <div class="card-header">
+            Information Personel
+        </div>
+        <div class="card-body">
+            <table>
+                @foreach (var item in ViewBag.CandidateVB)
+                {
+
+                    <tr>
+                        <th>Nom :  </th>
+                        <td>@item.first_name</td>
+                    </tr>
+                    <tr>
+                        <th>Prenom : </th>
+                        <td>@item.last_name</td>
+                    </tr>
+                    <tr>
+                        <th>Date de naissance : </th>
+                        <td>@item.Birthdate @item.Age ans</td>
+                    </tr>
+                    <tr>
+                        <th>Numero telephone : </th>
+                        <td>@item.phone_number</td>
+                    </tr>
+                    <tr>
+                        <th>Email :  </th>
+                        <td>@item.email</td>
+                    </tr>
+
+                    List<SelectListItem> lst = new List<SelectListItem>();
+
+                    foreach (var cv in item.cvs)
+                    {
+                        lst.Add(new SelectListItem
+                        {
+                            Text = "CV" + cv.id,
+                            Value = ""+cv.id,
+                            Selected = false
+                        });
+                    }
+                    <tr>
+                        <th>Cvs :  </th>
+                        <td>@Html.DropDownList("cv", lst, null, new { @class = "form-control" })</td>
+                    </tr>
+                }
+            </table>
+        </div>
+    </div>
+    
+
+<div class="card">
+    <div class="card-header">
+        Experiences
+    </div>
+    <div class="card-body">
+@if (ViewBag.ExperienceVB.Count > 0 || ViewBag.ExperienceVB != null)
+{
+        foreach (var item in ViewBag.ExperienceVB)
+        {
+            <ul>
+                <li>Adresse : @item.addressLine1 @item.addressLine2, cité @item.city @item.country, code postal @item.zipCode ,province @item.state</li>
+                <li>Poste : @item.Role</li>
+                <li>Periode de  @item.Start_Date à  @item.End_Date , Durée: @item.Duration mois</li>
+                <li>Sujet: @item.Subject</li>
+                <li>secteur: @item.Sector</li>
+                <li>Entreprise d'accueil: @item.Company_Name</li>
+                <li>Département: @item.Department</li>
+            </ul>
+        }
+}
+            <a href="@Url.Action("AddExperience", "Candidat", new { cv = ViewBag.CandidateVB[0].cvs[0].id })" class="btn btn-primary">Ajouter des experiences</a>
+        
+        
+    </div>
+</div>
+
+
+
+<div class="card">
+    <div class="card-header">
+        Centres d'intérêts
+    </div>
+    <div class="card-body">
+@if (ViewBag.HobbiesVB.Count > 0 || ViewBag.HobbiesVB != null)
+{
+    foreach (var item in ViewBag.HobbiesVB)
+    {
+            <ul>
+                <li>@item.Name</li>
+                <li>@item.Level</li>
+                <li>@item.Place</li>
+                <li>@item.Type</li>
+            </ul>
+        }
+}
+        <a href="@Url.Action("AddHobbies", "Candidat", new { cv = ViewBag.CandidateVB[0].cvs[0].id })" class="btn btn-primary">Ajouter des centres d'intérêts</a>
+    </div>
+</div>
+
+
+
+
+<div class="card">
+    <div class="card-header">
+        Competences
+    </div>
+    <div class="card-body">
+@if (ViewBag.skillsVB.Count > 0 || ViewBag.skillsVB != null)
+{
+    foreach (var item in ViewBag.skillsVB)
+    {
+            <ul>
+                <li>@item.Name</li>
+                <li>@item.Level</li>
+                <li>@item.Type</li>
+            </ul>
+        }
+}
+        <a href="@Url.Action("AddSkill", "Candidat", new { cv = ViewBag.CandidateVB[0].cvs[0].id })" class="btn btn-primary">Ajouter compétences</a>
+    </div>
+</div>
+
+
+<a href="@Url.Action("EmailSend", "Candidat", new { candidateName = ViewBag.CandidateVB[0].first_name, idCandidate = ViewBag.CandidateVB[0].id })" class="btn btn-primary">Send Email</a>
+
+
+
+ 

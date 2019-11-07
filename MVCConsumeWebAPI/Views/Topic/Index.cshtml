@@ -1,0 +1,167 @@
+﻿
+<div class="container-fluid">
+    <div class="row">
+        <!-- Column -->
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="d-flex no-block align-items-center m-b-30">
+                        <h4 class="card-title">Liste des sujets</h4>
+                        <div class="ml-auto">
+                            <div class="btn-group">
+                                @*<form action="@Url.Action("Create","Topic")">*@
+                                    <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#createmodel"
+                                               onclick="location.href='@Url.Action("Create", "Topic")'"  >
+                                        Ajouter sujet
+
+                                    </button>
+                                @*</form>*@
+                            </div>
+                        </div>
+                    </div>
+                    <div class="table-responsive">
+                        <table id="file_export" class="table table-bordered nowrap display" style="border-width:2px; border-style:solid;  border-color:darkgray; width:100%;">
+                            <thead>
+                                <tr>
+                                    <th>Nom</th>
+                                    <th>Duree sujet</th>
+                               
+                                    <th>Nombre question</th>
+                                    <th>Supprimer</th>
+                                    <th>Modifier</th>
+                                    <th>Gestion question</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var p in ViewBag.result)
+                                {
+                                    <tr>
+                                        <td>@p.nom</td>
+                                        <td>@p.dureeTopic</td>
+                                
+                                        <td>@p.nombre_question</td>
+                                        <td>@Ajax.ActionLink(" Supprimer", "Delete", new { id = p.id }, new AjaxOptions { HttpMethod = "DELETE", OnSuccess = "RemoveRow" }, new { @class = "btn btn-sm btn-icon delete-row-btn" })
+
+</td>
+
+
+                                        <td>
+                                            @*<a href="@Url.Action("Edit","Topic",new {id=p.id})">Modifier </a>*@
+                                            <center>
+                                                
+                                                    <button style="color:darkorange; background-color:white;" type="button" class="btn btn-sm btn-icon btn-pure btn-outline delete-row-btn" data-toggle="tooltip" data-original-title="Modifier"
+                                                             onclick="location.href='@Url.Action("Edit", "Topic",new {id=p.id})'">
+                                                        <i class="ti-brush-alt" aria-hidden="true"></i>
+                                                    </button>
+                                               
+                                                    <br />
+                                                    @*@Ajax.ActionLink("Index", "Question", new { id = p.id }, new AjaxOptions { }, new { @class = "btn btn-sm btn-icon btn-pure btn-outline delete-row-btn" })*@
+                                                    @*<a href="@Url.Action("Delete","Topic",new {id=p.id} )">Supprimer </a>*@
+                                              
+                                              
+
+                                                <button style="color:darkorchid ; background-color:white;" type="button" class="btn btn-sm btn-icon btn-pure btn-outline delete-row-btn" data-toggle="tooltip" data-original-title="Supprimer" id="addressSearch"
+                                                        >
+                                                    <i class="ti-trash" aria-hidden="true"></i>
+                                                    </button>
+                                                    
+</center>
+
+
+                                        </td>
+
+                                       
+                                        <td>
+                                            @*<a href="@Url.Action("Index","Question",new {id=p.id})">Lister question </a>*@
+                                            <center>
+                                                <button style="color:red; background-color:white;" type="button" class="btn btn-sm btn-icon btn-pure btn-outline delete-row-btn" data-toggle="tooltip" data-original-title="Liste question"
+                                                           onclick="location.href='@Url.Action("Index", "Question",new {id=p.id})'">
+                                                    <i class="ti-gallery" aria-hidden="true"></i>
+                                                </button>
+                                           <br />
+                                            @*<a href="@Url.Action("Create","Question",new {id=p.id})">Ajouter question </a>*@
+                                           
+                                                <button style="color:forestgreen; background-color:white" type="button" class="btn btn-sm btn-icon btn-pure btn-outline delete-row-btn" data-toggle="tooltip" data-original-title="Nouveau question"
+                                                         onclick="location.href='@Url.Action("Create", "Question",new {id=p.id})'">
+                                                    <i class="ti-plus" aria-hidden="true"></i>
+                                                </button>
+                                            </center>
+
+
+                                        </td>
+                                       
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+</div>
+
+
+@*/////////*@
+
+<input type="text" id="search_input" class="form-control" placeholder="Sujet par nom">
+
+<div id="search_output" style="left: 0px; top: -10.5px;">
+
+
+</div>
+
+
+@section scripts{ @Scripts.Render("~/Scripts/jquery.unobtrusive-ajax.min.js")}
+<script type="text/javascript">
+    function RemoveRow() {
+        var $tr = $(this).closest('tr');
+        $tr.remove();
+    }
+</script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<script type="text/javascript">
+
+        $("#search_input").keyup(function () {
+           // alert("hello");
+
+                                                var i = $("#search_input").val();
+                                                $.ajax({
+                                                    type: "POST",
+                                                    url: "http://localhost:4054/Topic/GetSearch",
+                                                    dataType: 'json',
+                                                    data:{'search':i},
+                                                    success: function (Data) {
+                                                        console.log(Data);
+                                                        $("#search_output").html("<table style='border-width:2px; border-style:solid; border-color:black; width:100%;' id='res' class='table table-striped table-bordered' cellspacing='0' width='100%'><thead><tr>  <th>Nom</th> <th>Duree sujet</th><th>Image</th>  <th>Nombre question</th> </tr></thead><tbody>");
+                                                        $.each(Data, function (key, value) {
+
+                                                            $('#res').append(
+                                                                            "<tr>" +
+                                                                            "<td>" + value.nom + "</td>" +
+                                                                           "<td>"+value.dureeTopic+"</td>"+
+                                                                             "<td>"+value.image+"</td>"+
+                                                                               "<td>"+value.nombre_question+"</td>"+
+
+
+                                 
+
+
+                                                                "</tr>");
+                                                            $('#res').append("</tbody></table>");
+
+
+                                                        })
+                                                      }
+                                                    ,
+                                                    error: function (error) {
+                                                        console.log(error);
+                                                    }
+                                                });
+        });
+</script>
+
+
+
+

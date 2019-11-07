@@ -1,0 +1,99 @@
+﻿@model MVCConsumeWebAPI.Models.topic
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Quiz</h2>
+@*<div>
+    <h4>topic</h4>
+    <hr />
+  
+
+        @foreach (var item in Model.questions)
+        {
+            <h3>@item.enonce</h3>
+            foreach (var reponse in item.answers)
+            {
+                        <input type="checkbox" id="txt" name="@reponse.type_reponse"
+                              >
+
+                        <label for="txt">@reponse.type_reponse</label> 
+                        <br />
+            }
+
+}
+
+    <button type="submit" @Url.Action("Valider","Topic")>Valider</button>
+    
+
+</div>*@
+
+
+
+
+<form id="frm1"  method="post" target="_blank">
+
+  
+        @foreach (var item in Model.questions)
+        {
+            <h3>@item.enonce</h3>
+            foreach (var reponse in item.answers)
+            {
+                <input type="text" name="@reponse.type_reponse" value="@reponse.type_reponse" disabled><br>
+                <input type="checkbox" class="myCheckBox">
+                <br />
+            }
+            <a href="@Url.Action("Create","Reclamation",new {   item.topic.id})">Reclamation </a>
+         
+
+}
+ 
+    <input type="submit" value="Submit" onclick="myFunction()">
+</form>
+
+
+
+<script>
+function myFunction() {
+
+    var x = document.getElementById("frm1");
+    var text = "";
+    var i;
+    for (i = 0; i < x.length ;i++)
+	{
+     if (x.elements[i+1].type === 'checkbox' && x.elements[i+1].checked == 0)
+        x.elements[i].value = "";
+    }
+
+}
+</script>
+
+@*<script>
+$('input[type=checkbox]').click(function () {
+    if ($('input[type=checkbox]').is(':checked')) {
+        $('#txt').val('checked');
+    }
+    else{
+        $('#txt').val('unchecked');
+    }
+});
+    </script>*@
+
+
+
+
+@*<input type="checkbox" id="isSelected" />
+<div id="myDiv" style="display:none">Is Checked</div>
+
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script>
+        $('#isSelected').click(function() {
+            $("#myDiv").toggle(this.checked);
+        });
+</script>*@
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

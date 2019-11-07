@@ -1,0 +1,114 @@
+﻿@model MVCConsumeWebAPI.Models.topic
+
+@*@{
+        ViewBag.Title = "Details";
+    }
+
+    <h2>Details</h2>*@
+
+
+
+@using (Html.BeginForm("Details", "Topic", FormMethod.Post, new { id = "frm1", onsubmit = "return SubmitForm(this)" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        @*<h4>topic</h4>*@
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.id)
+
+        @*<div class="form-group">
+                @Html.LabelFor(model => model.dureeTopic, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.dureeTopic, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.dureeTopic, "", new { @class = "text-danger" })
+                </div>
+            </div>*@
+
+        @*<div class="form-group">
+                @Html.LabelFor(model => model.image, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.image, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.image, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.nom, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.nom, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.nom, "", new { @class = "text-danger" })
+                </div>
+            </div>*@
+
+        @*@Html.DropDownList("QuestionsList", new SelectList(Model.questions, "id", "enonce"))*@
+
+        @foreach (var item in Model.questions)
+        {
+            <div class="form-group">
+                @*@Html.LabelFor(model => item.enonce, htmlAttributes: new { @class = "control-label col-md-2" })*@
+                <div class="col-md-10">
+                    @*<input type="text" name="@reponse.type_reponse" value="@reponse.type_reponse" disabled><br>*@
+                    @Html.Label(item.enonce)
+
+                </div>
+                @foreach (var answer in item.answers)
+                {
+                    @Html.HiddenFor(model => answer.id)
+                    <div class="col-md-10">
+                        <input type="checkbox" class="myCheckBox">
+                        @*@Html.LabelFor(model => answer.type_reponse, htmlAttributes: new { @class = "control-label col-md-2" })*@
+
+                        @Html.Label(answer.type_reponse)
+                        @*@Html.EditorFor(model => answer.type_reponse, new { htmlAttributes = new { @class = "form-control" } })*@
+                    </div>
+
+                }
+
+            </div>
+
+
+        }
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<script>
+    function SubmitForm(form) {
+        var x = document.getElementById("frm1");
+        var text = "";
+        var i;
+        for (i = 0; i < x.length ; i++) {
+            if (x.elements[i + 1].type === 'checkbox' && x.elements[i + 1].checked == 0)
+                x.elements[i].value = "";
+        }
+
+
+
+        var dataToSend = JSON.stringify(form);
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("Details", "Topic")',
+            dataType: "json",
+            data: dataToSend,
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+                if (data.success) {
+
+                    alert("wsellllt");
+
+
+                }
+            }
+        });
+        return false;
+}
+</script>
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

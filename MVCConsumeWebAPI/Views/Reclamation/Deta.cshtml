@@ -1,0 +1,56 @@
+﻿@model MVCConsumeWebAPI.Models.reclamation
+
+@{
+    ViewBag.Title = "Deta";
+}
+
+<h2>Traitement reclamation</h2>
+
+
+<div class="row">
+    <!-- Column -->
+    <div class="col-lg-12 col-xlg-12 col-md-12">
+        <div class="card">
+            <div class="card-body">
+                <center class="m-t-30">
+                    <img src="../../assets/images/users/5.jpg" class="rounded-circle" width="150" />
+                    <h4 class="card-title m-t-10"><u>Objet</u></h4>
+                    <br />
+                    <center>
+                        @Html.DisplayFor(model => model.objet)
+                    
+                    </center>
+                   
+                    <div class="row text-center justify-content-md-center">
+                        
+                    </div>
+                </center>
+            </div>
+            <div>
+                <hr>
+            </div>
+            <div class="card-body">
+                <h2><u>Description</u></h2>
+                <br />
+                <h4>@Html.DisplayFor(model => model.description)</h4>
+               
+                <h2><u>Date création</u></h2>
+                <br />
+            <h4>@Html.DisplayFor(model => model.date_creation)</h4>
+
+                <br />
+             
+              
+
+                <center>
+                    <button type="submit" class="btn btn-success m-r-10"    onclick="location.href='@Url.Action("Accepter", "Reclamation",new {id=ViewBag.id})'">
+                     Accepter<i class="fas fa-check" aria-hidden="true"></i></button>
+                    <button type="submit" class="btn btn-dam-r-10" onclick="location.href='@Url.Action("Refuser", "Reclamation",new {id=ViewBag.id})'">
+                        Refuser<i class="fas fa-check" aria-hidden="true"></i>
+                    </button>
+                </center>
+            </div>
+        </div>
+    </div>
+    </div>
+  

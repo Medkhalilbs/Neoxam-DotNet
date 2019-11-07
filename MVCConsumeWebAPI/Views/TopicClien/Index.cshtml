@@ -1,0 +1,162 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+@*<h2>Index</h2>
+<div class="demo-section k-content wide">
+    <ul id="products" class="dairy-photos">
+        @foreach (var p in ViewBag.result)
+        {
+<li><a href="@Url.Action("Details","Topic",new {id=p.id})">*@
+   
+    @*<img src="@Url.Content("")" width="20" />*@
+    @*@p.nom*@
+@*</a> </li>
+
+        } </ul>
+</div>*@
+
+
+
+<center><h1 class="d-inline">Choisir un sujet</h1></center>
+<hr />
+<div class="container-fluid">
+    <div class="row el-element-overlay">
+@foreach (var p in ViewBag.result)
+{
+        <div class="col-lg-3 col-md-6">
+            <a href="@Url.Action("Details","Topic",new {id=p.id})">
+                <div class="card">
+                    <div class="el-card-item">
+                        <div class="el-card-avatar el-overlay-1">
+                            <img src="https://images.sftcdn.net/images/t_app-cover-l,f_auto/p/befbcde0-9b36-11e6-95b9-00163ed833e7/260663710/the-test-fun-for-friends-screenshot.jpg" alt="user" />
+                            <div class="el-overlay">
+                                <ul class="list-style-none el-info">
+                                    @*<li class="el-item"><a class="btn default btn-outline image-popup-vertical-fit el-link" href="https://images.sftcdn.net/images/t_app-cover-l,f_auto/p/befbcde0-9b36-11e6-95b9-00163ed833e7/260663710/the-test-fun-for-friends-screenshot.jpg"><i class="icon-magnifier"></i></a></li>*@
+                                    @*<li class="el-item"><a class="btn default btn-outline el-link" href="javascript:void(0);"><i class="icon-link"></i></a></li>*@
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="el-card-content">
+                        <h5 style="color:black">@p.nom</h5>   
+                        </div>
+                    </div>
+                </div>
+                </a>
+</div>
+
+}
+
+    </div>
+  
+</div>
+
+
+
+
+
+<!-- Row -->
+@*<div class="row">
+    <div class="col-12">
+        
+      
+       <hr />
+        <!-- Row -->
+        <div class="row">
+           @foreach (var p in ViewBag.result) {
+            <div class="col-lg-3 col-md-6">
+                <!-- Card -->
+                <div class="card">
+                    <img class="card-img-top img-responsive" src="https://images.sftcdn.net/images/t_app-cover-l,f_auto/p/befbcde0-9b36-11e6-95b9-00163ed833e7/260663710/the-test-fun-for-friends-screenshot.jpg" alt="Card image cap">
+                    <div class="card-body">
+                        <h4 class="card-title">@p.nom</h4>
+                        <a class="btn btn-primary" href="@Url.Action("Details","Topic",new {id=p.id})"> @p.nom </a>
+                    </div>
+                </div>
+                <!-- Card -->
+            </div>
+           }
+           
+        </div>
+    
+    </div>
+</div>*@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@*@(Html.Kendo().Tooltip()
+    .For("#products")
+    .Filter("a")        
+    .ContentTemplateId("template")
+    .Position(TooltipPosition.Top)
+    .Width(400)
+    .Height(200)
+)*@
+
+<script id="template" type="text/x-kendo-template">
+    @*<div class="template-wrapper">
+        <img src="@Url.Content("~/content/web/foods/200/")#=target.data('id')#.jpg" alt="#=target.data('title')#" />
+        <p>#=target.data('title')#</p>
+    </div>*@
+</script>
+
+<style>
+    .template-wrapper{
+        display: flex;
+        flex-direction: row;
+        height: 180px; 
+    }
+    .dairy-photos {
+        list-style-type: none;
+        margin: 15px 0 15px 10px;
+        padding: 0;
+    }
+    .dairy-photos li {
+        display: inline-block;
+        margin: 5px;
+        padding: 0;
+        vertical-align: top;
+    }
+    .dairy-photos a {
+        display: block;
+        width: 100px;
+        height: 155px;
+        padding: 0 0 0 10px;
+        font-size: .9em;
+        line-height: 1.2em;
+        text-transform: uppercase;
+        color: #777;
+        background-color: rgba(255,255,255,0.8);
+        -moz-box-shadow: 0 1px 2px 0 rgba(0,0,0,0.2);
+        -webkit-box-shadow: 0 1px 2px 0 rgba(0,0,0,0.2);
+        box-shadow: 0 1px 2px 0 rgba(0,0,0,0.2);
+    }
+    .dairy-photos a:hover {
+        color: #fff;
+        background-color: #000;
+    }
+    .dairy-photos a img {
+        margin: 0 0 5px -10px;
+    }
+    .template-wrapper p {
+        font-size: 1em;
+        line-height: 1.2;
+        padding: 20px;
+        width: 180px;
+        text-align: left;
+        box-sizing: border-box;
+        margin: 0;
+    }
+</style>

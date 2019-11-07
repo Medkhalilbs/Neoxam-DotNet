@@ -1,0 +1,33 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=devic-width" />
+    <title></title>
+</head>
+<body>
+    <a href="#">Add new employe</a>
+
+    <table cellpadding="2" cellspacing="2" border="1">
+        <tr>
+            <th>ID</th>
+            <th>Login</th>
+            <th>Email</th>
+        </tr>
+        @foreach(var p in ViewBag.result)
+        {
+            <tr>
+                <td>@p.id</td>
+                <td>@p.contenu</td>
+                <td>@p.destinataire</td>
+                <td>@p.dateEnvoie</td>
+                
+
+            </tr>
+        }
+
+    </table>
+
+
+</body>
+
+</html>

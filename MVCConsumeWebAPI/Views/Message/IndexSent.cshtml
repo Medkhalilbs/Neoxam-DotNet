@@ -1,0 +1,93 @@
+﻿@model IEnumerable<MVCConsumeWebAPI.Models.Message>
+
+@using MVCConsumeWebAPI.Extensions
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Mes messages</h2>
+
+
+<table class="table table-hover" id="messageTable">
+    <tr>
+
+        <th>
+            @Html.DisplayName("Destinataire")
+        </th>
+        <th>
+            @Html.DisplayName("Date de Reception")
+        </th>
+        <th>
+            @Html.DisplayName("Etat")@*//date_lecture*@
+        </th>
+        <th>
+            @Html.DisplayName("Sujet")
+        </th>
+        <th>
+            @Html.DisplayName("Visibilité")
+        </th>
+
+        <th><center>Action</center></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.destinataire)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.dateEnvoie)
+        </td>
+        
+            @if (item.dateLecture != null)
+            { <td>
+                    Vu le @Html.DisplayFor(modelItem => item.dateLecture)
+             </td>
+            }
+            else
+            {
+                <td>
+                    En attente
+                </td>
+            }
+        
+        <td>
+            @Html.DisplayFor(modelItem => item.sujet)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.visibiliteMessage)
+        </td>
+
+        <td>
+            <center>
+
+            <a class="btn btn-info glyphicon glyphicon-trash" href="@Url.Action("Details", "Message", new { id = item.id })"  ><i class="ti-settings m-r-5 m-l-5"></i> Detail </a>|
+          
+            <a class="btn btn-success glyphicon glyphicon-pencil" href="@Url.Action("Edit", "Message", new { id = item.id })" > <i class="ti-settings m-r-5 m-l-5"></i> Modifier</a>|
+
+                @*@Html.ActionLink("Modifier", "Edit", new { id = item.id }) |
+                @Html.ActionLink("Details", "Details", new { id = item.id }) |*@
+
+
+                @Ajax.ActionLink(" Supprimer", "Delete", new { id = item.id }, new AjaxOptions { Confirm = "Are you sure you want to delete this entry?", HttpMethod = "DELETE", OnSuccess = "RemoveRow" }, new { @class = "btn btn-danger glyphicon glyphicon-trash" })
+                @*@Ajax.ActionLink("Delete", "Delete", new { id = item.id }, new AjaxOptions { Confirm = "Are you sure you want to delete this entry?", HttpMethod = "DELETE" })*@
+            </center>
+        </td>
+    </tr>
+}
+
+</table>
+@section scripts{ @Scripts.Render("~/Scripts/jquery.unobtrusive-ajax.min.js")}
+<script type="text/javascript">
+    function RemoveRow() {
+        var $tr = $(this).closest('tr');
+        $tr.remove();
+    }
+</script>
+
+
+
+
+
+

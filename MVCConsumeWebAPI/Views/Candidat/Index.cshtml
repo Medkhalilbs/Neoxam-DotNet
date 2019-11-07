@@ -1,0 +1,104 @@
+﻿@model IEnumerable<MVCConsumeWebAPI.Models.User>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2 align="center">Liste des candidats</h2>
+
+
+<table class="table" border="2">
+    <tr>
+        <th>
+            Nom
+        </th>
+        <th>
+            Prenom
+        </th>
+        <th>
+            Email
+        </th>
+        <th>
+            Numéro de téléphone
+        </th>
+        <th>
+            Date d'enregistrement
+        </th>
+        <th>Etat</th>
+        <th>Modifier</th>
+        <th>Details</th>
+        <th>Effacer</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.first_name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.last_name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.phone_number)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.registration_date)
+            </td>
+            <td>
+                @if (item.ProfilValide == 0)
+                {
+                    <span class="badge  badge-warning">en attente</span>
+                }
+                else if (item.ProfilValide == 1)
+                {
+                    <span class="badge  badge-danger">non valide</span>
+                }
+                else
+                {
+                    <span class="badge  badge-success">valide</span>
+                }
+            </td>
+
+            <td>
+
+                <a href="@Url.Action("Edit", new { id = item.id })">
+                    <img src="~/Content/Icon/edit.png" alt="Edit" style="border:none;width:25px;height:25px" />
+                </a>
+
+            </td>
+            <td>
+                <a href="@Url.Action("Details", new { id = item.id })">
+                    <img src="~/Content/Icon/seo.png" alt="Details" style="border:none;width:25px;height:25px" />
+                </a>
+
+            </td>
+            <td>                                                                                     
+                 <a href="@Url.Action("Delete", new {id = item.id}) " onclick = "return confirm('Êtes-vous sûr de vouloir supprimer ce candidat ?')">
+                    <img src="~/Content/Icon/delete.png" alt="Delete" style="border:none;width:25px;height:25px" />
+                </a>
+            </td>
+        </tr>
+    }
+
+</table>
+
+<div class="card text-center">
+@using (Html.BeginForm("", "", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <div class="card-header">
+        Upload PST file
+    </div>
+    <div class="card-body">
+        <input type="file" class="form-control-file" style="width:300px; margin:auto" name="fileName" id="fileName" /><br><br>
+        
+    </div>
+    <div class="card-footer text-muted">
+        <input class="btn btn-info" type="submit" value="Upload file" formaction="http://127.0.0.1:18080/gestion-resources-humaine-web/UploadPstServlet" />
+        
+    </div>
+}
+</div>

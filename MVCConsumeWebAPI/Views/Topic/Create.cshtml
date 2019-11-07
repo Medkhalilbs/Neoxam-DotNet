@@ -1,0 +1,201 @@
+﻿@model MVCConsumeWebAPI.Models.topic
+
+@{
+    ViewBag.Title = "Create";
+}
+
+@*<h2>Create</h2>
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()*@
+    
+    @*<div class="form-horizontal">
+        <h4>topic</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.dureeTopic, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.dureeTopic, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.dureeTopic, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
+
+        @*<div class="form-group">
+            @Html.LabelFor(model => model.image, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.image, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.image, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
+
+        @*<div class="form-group">
+            @Html.LabelFor(model => model.nom, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.nom, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.nom, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
+
+        @*<div class="form-group">
+            @Html.LabelFor(model => model.domain, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.domain, ViewData["Suppliers"] as SelectList, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.domain, "", new { @class = "text-danger" })
+               
+            </div>
+        </div>*@
+
+        
+
+
+
+        @*<div class="col-md-10">
+            @*ViewBag.CityList is holding all the cities values*@
+            @*@Html.DropDownListFor(model => model.domain, ViewBag.result as SelectList, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.domain.name, "", new { @class = "text-danger" })
+        </div>*@*
+
+            @*<div class="form-group">
+                @Html.LabelFor(model => model.nombre_question, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.nombre_question, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.nombre_question, "", new { @class = "text-danger" })
+                </div>
+            </div>*@
+
+        @*<div class="form-group">
+            @Html.LabelFor(model => model.domain, htmlAttributes: new { @class = "control-label col-md-2" })
+
+            <div class="col-md-10">
+
+                <select id="select_domain">
+                    @foreach (var p in ViewBag.result)
+                {
+                        <option name=@p.name value=@p.id> @p.name</option>
+
+                }
+
+            </select>
+                @Html.HiddenFor(model=>model.domain.id,new { @id="domain_value"})
+               
+                <script>
+
+                    document.getElementById("domain_value").value = document.getElementById("select_domain").value;
+
+                </script>
+            </div>
+        </div>*@
+
+            @*<div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Create" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+}*@
+
+
+@using (Html.BeginForm())
+{
+        @Html.AntiForgeryToken()
+<div class="row">
+
+    <div class="col-lg-11">
+        <div class="card">
+            <div class="card-body">
+                <h2 class="card-title">Ajouter un nouveau sujet</h2>
+                <form class="form p-t-20">
+                    <div class="form-group">
+                        <label>Ajouter nom sujet</label>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-addon11"><i class="icon-folder-alt"></i></span>
+                            </div>
+                            <div class="col-11">
+                                <input type="text" class="form-control" placeholder="Sujet" aria-label="sujet" aria-describedby="basic-addon22" id="id" name="nom" />
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Ajouter nombre de question</label>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-addon11"><i class="ti-more-alt"></i></span>
+                            </div>
+                            <div class="col-11">
+                                <input type="number" class="form-control" placeholder="Nombre question" aria-label="nombre" aria-describedby="basic-addon22" id="id" name="nombre_question" />
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Durée examen</label>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-addon11"><i class="ti-time"></i></span>
+                            </div>
+                            <div class="col-11">
+                                <input type="number" class="form-control" placeholder="Duree question" aria-label="nombre" aria-describedby="basic-addon22" id="id" name="dureeTopic" />
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="col-12">
+                        <div class="form-group">
+                            <label>Choisir type</label>
+                            <select class="custom-select col-12" id="inlineFormCustomSelect" name="domain_id">
+@foreach (var p in ViewBag.result)
+{
+    <option name=@p.name value=@p.id> @p.name</option>
+}
+                            </select>
+                            @Html.HiddenFor(model => model.domain.id, new { @id = "domain_value" })
+
+                            <script>
+
+                                document.getElementById("domain_value").value = document.getElementById("inlineFormCustomSelect").value;
+
+                            </script>
+                        </div>
+                    </div>
+
+                    <div class="form-group row p-t-20">
+                        @*<div class="col-sm-4">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input" id="customCheck3">
+                                    <label class="custom-control-label" for="customCheck3">Check this custom checkbox</label>
+                                </div>
+                            </div>*@
+                        @*<div class="col-sm-4">
+                                <div >
+                                    <input type="radio" name="type" id="id">
+                                    <label >Langue</label>
+                                </div>
+                            </div>*@
+                    </div>
+                    @(Html.Kendo().Upload()
+            .Name("files")
+            .HtmlAttributes(new { aria_label = "files" })
+                    )
+                    <button type="submit" class="btn btn-success m-r-10" > <i class="ti-save"></i> Ajouter</button>
+                    <button type="submit" class="btn btn-dark">Cancel</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Create" class="btn btn-default" />
+                    </div>
+                </div>
+          
+    }

@@ -1,0 +1,63 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+
+<div class="container-fluid">
+    <div class="row">
+        <!-- Column -->
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="d-flex no-block align-items-center m-b-30">
+                        <h4 class="card-title">Liste des questions pour ce sujet</h4>
+
+                        </div>
+                        <div class="table-responsive">
+                            <table id="file_export" class="table table-bordered nowrap display" style="border-width:2px; border-style:solid;  border-color:darkgray; width:100%;">
+                                <thead>
+                                    <tr>
+                                        <th>Enonce</th>
+                                        <th>Complexite</th>
+                                        <th>Indice</th>
+                                        <th>Point</th>
+                                       
+                                        <th>Reponse</th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var p in ViewBag.result)
+                                    {
+                                        <tr>
+                                            <td>@p.enonce</td>
+                                            <td>@p.complexity</td>
+                                            <td>@p.indice</td>
+                                            <td>@p.point</td>
+                                          
+                                            <td>
+                                                <a href="@Url.Action("Index","Reponse",new {id=p.id})">Lister reponse </a>
+
+                                                @*@Url.Action(" Index", "Reponse", new { id =p.id }, new { @class = "btn btn-danger glyphicon glyphicon-trash" })*@
+
+
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+@section scripts{ @Scripts.Render("~/Scripts/jquery.unobtrusive-ajax.min.js")}
+<script type="text/javascript">
+    function RemoveRow() {
+        var $tr = $(this).closest('tr');
+        $tr.remove();
+    }
+</script>
+

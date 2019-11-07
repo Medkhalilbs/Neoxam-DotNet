@@ -1,0 +1,178 @@
+﻿
+ <div class="container-fluid">
+                <div class="row">
+                    <!-- Column -->
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="d-flex no-block align-items-center m-b-30">
+                                    <h4 class="card-title">Liste des themes</h4>
+                                    <div class="ml-auto">
+                                        <div class="btn-group">
+                                                <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#createmodel"
+                                                      onclick="location.href='@Url.Action("Create", "Domain")'"  >
+                                                    Ajouter theme
+                                                </button></div>
+                                    </div>
+                                </div>
+                                <div class="table-responsive">
+                                    <table style="border-width:2px; border-style:solid;  border-color:darkgray; width:100%;" id="file_export" class="table table-bordered nowrap display">
+                                        <thead>
+                                            <tr>
+                                                <th>Nom</th>
+                                                <th>Type</th>
+                                                <th>Supprimer</th>
+                                                <th>Liste sujet</th>
+                                                
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+@foreach (var p in ViewBag.result)
+{
+                                            <tr>
+                                                <td>@p.name</td>
+                                                <td>@p.type</td>
+                                                <td>
+                                                    @*<a href="@Url.Action("Delete","Domain",new {id=p.id})">Supprimer </a>*@
+         @Ajax.ActionLink(" Supprimer", "Delete", new { id = p.id }, new AjaxOptions { HttpMethod = "DELETE", OnSuccess = "RemoveRow" }, new { @class = "btn btn-sm btn-icon btn-pure btn-outline delete-row-btn" })
+
+
+                                                      <center>
+                                                                <button style="color:red" type="button" class="btn btn-sm btn-icon btn-pure btn-outline delete-row-btn" data-toggle="tooltip" data-original-title="Supprimer">
+                                                    <i class="ti-close" aria-hidden="true"></i></button></center>
+                                                
+                                                   
+                                                </td>
+                                                <td>
+                                                    <a href="@Url.Action("Index","Topic")">Sujets </a>
+                                                    <center>
+                                                        <button style="color:darkorchid" type="button" class="btn btn-sm btn-icon btn-pure btn-outline delete-row-btn" data-toggle="tooltip" data-original-title="Sujets">
+                                                            <i class="ti-gallery" aria-hidden="true"></i>
+                                                        </button>
+                                                    </center>
+                                                   
+
+                                                </td>
+                                            </tr>
+}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Column -->
+      
+                <!-- ============================================================== -->
+                <!-- .right-sidebar -->
+                <!-- ===================================
+
+                        <!-- Create Modal -->
+            <div class="modal fade" id="createmodel" tabindex="-1" role="dialog" aria-labelledby="createModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="createModalLabel"><i class="ti-marker-alt m-r-10"></i>Ajouter un nouveau theme</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                             @model MVCConsumeWebAPI.Models.Domain
+
+
+                            @using (Html.BeginForm())
+                            {
+                                @Html.AntiForgeryToken()
+
+
+
+                                <div class="row">
+
+                                    <div class="col-lg-11">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <form class="form p-t-20">
+                                                    <div class="form-group">
+                                                        <label>Ajouter nom domaine</label>
+                                                        <div class="input-group mb-3">
+                                                            <div class="input-group-prepend">
+                                                                <span class="input-group-text" id="basic-addon11"><i class="icon-folder-alt"></i></span>
+                                                            </div>
+                                                            <div class="col-10">
+                                                                @*@Html.EditorFor(model => model.name, new { htmlAttributes = new { @class = "form-control" } })
+                                                                    @Html.ValidationMessageFor(model => model.name, "", new { @class = "text-danger" })*@
+                                                                <input type="text" class="form-control" placeholder="Theme" aria-label="domain" aria-describedby="basic-addon22" id="id" name="name" />
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-12">
+                                                        <div class="form-group">
+                                                            <label>Choisir type</label>
+                                                            <select class="custom-select col-12" id="inlineFormCustomSelect" name="type">
+
+                                                                <option value="0">Technique</option>
+                                                                <option value="1">Langue</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group row p-t-20">
+                                                        @*<div class="col-sm-4">
+                                                                <div class="custom-control custom-checkbox">
+                                                                    <input type="checkbox" class="custom-control-input" id="customCheck3">
+                                                                    <label class="custom-control-label" for="customCheck3">Check this custom checkbox</label>
+                                                                </div>
+                                                            </div>*@
+                                                        @*<div class="col-sm-4">
+                                                                <div >
+                                                                    <input type="radio" name="type" id="id">
+                                                                    <label >Langue</label>
+                                                                </div>
+                                                            </div>*@
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="submit" class="btn btn-success m-r-10"> <i class="ti-save"></i> Ajouter</button>
+                                                        <button type="submit" class="btn btn-dark">Cancel</button>
+                                                    </div>
+</form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+                            }
+
+
+
+
+
+                            <div>
+                                @Html.ActionLink("Back to List", "Index")
+                            </div>
+
+
+
+                            </div>
+                       
+                    </div>
+                </div>
+            </div>
+                    </div>
+      </div>
+
+
+
+
+@section scripts{ @Scripts.Render("~/Scripts/jquery.unobtrusive-ajax.min.js")}
+<script type="text/javascript">
+    function RemoveRow() {
+        var $tr = $(this).closest('tr');
+        $tr.remove();
+    }
+</script>
